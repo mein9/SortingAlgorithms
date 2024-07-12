@@ -8,18 +8,12 @@
             int[] arr2 = { 90, 3, 2, 56, 32, 34, 65, 68, 76, 1, 0, 100, 8 };
 
             PrintArray(arr1);
-
             BubbleSort(arr1);
-
             PrintArray(arr1);
 
             PrintArray(arr2);
-
             SelectionSort(arr2);
-            
             PrintArray(arr2);
-            
-
         }
         public static void PrintArray(int[] arr) 
         {
