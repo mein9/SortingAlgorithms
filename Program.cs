@@ -1,4 +1,6 @@
-﻿namespace SortingAlgorithms
+﻿using System.Diagnostics;
+
+namespace SortingAlgorithms
 {
     public class Program
     {
@@ -10,18 +12,32 @@
 
             Console.WriteLine("Bubblesort");
             PrintArray(arr1);
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             BubbleSort(arr1);
+            stopwatch.Stop();
             PrintArray(arr1);
+            Console.WriteLine("Elapsed time for Bubblesort: " + stopwatch.Elapsed);
+            Console.WriteLine();
+
 
             Console.WriteLine("SelectionSort");
             PrintArray(arr2);
+            stopwatch.Restart();
             SelectionSort(arr2);
+            stopwatch.Stop();
             PrintArray(arr2);
+            Console.WriteLine("Elapsed time for SelectionSort: " + stopwatch.Elapsed);
+            Console.WriteLine();
 
             Console.WriteLine("InsertionSort");
             PrintArray(arr3);
+            stopwatch.Restart();
             InsertionSort(arr3);
+            stopwatch.Stop();
             PrintArray(arr3);
+            Console.WriteLine("Elapsed time for InsertionSort: " + stopwatch.Elapsed);
+            Console.WriteLine();
         }
         public static void PrintArray(int[] arr)
         {
@@ -105,7 +121,7 @@
                     priorIndex--;
                 }
 
-                arrToSort[priorIndex+1] = temp;
+                arrToSort[priorIndex+1] = temp; // sets prior index to saved variable
             }
         }
     }
