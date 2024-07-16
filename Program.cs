@@ -6,18 +6,26 @@
         {
             int[] arr1 = { 90, 3, 2, 56, 32, 34, 65, 68, 76, 1, 0, 100, 8 };
             int[] arr2 = { 90, 3, 2, 56, 32, 34, 65, 68, 76, 1, 0, 100, 8 };
+            int[] arr3 = { 90, 3, 2, 56, 32, 34, 65, 68, 76, 1, 0, 100, 8 };
 
+            Console.WriteLine("Bubblesort");
             PrintArray(arr1);
             BubbleSort(arr1);
             PrintArray(arr1);
 
+            Console.WriteLine("SelectionSort");
             PrintArray(arr2);
             SelectionSort(arr2);
             PrintArray(arr2);
+
+            Console.WriteLine("InsertionSort");
+            PrintArray(arr3);
+            InsertionSort(arr3);
+            PrintArray(arr3);
         }
-        public static void PrintArray(int[] arr) 
+        public static void PrintArray(int[] arr)
         {
-            foreach(int i in arr) 
+            foreach (int i in arr)
             {
                 Console.Write(i + " ");
             }
@@ -48,7 +56,7 @@
                 }
                 if (swaps == 0) break;
             }
-           return totalOuterIterations;
+            return totalOuterIterations;
         }
 
         public static void SelectionSort(int[] arrToSort)
@@ -78,7 +86,28 @@
                     arrToSort[minIndex] = temp;
                 }
             }
+
+        }
+    
+        public static void InsertionSort(int[] arrToSort) 
+        {
+
+            for (int i = 1; i < arrToSort.Length; i++)
+            {
+                int temp = arrToSort[i];  // store element as it might be overwritten
+                int priorIndex = i - 1;  //start comparing with element before the current element
+
+                // if prior element is greater than stored element
+                // and we have not reached the end of the array
+                while (priorIndex >= 0 && arrToSort[priorIndex] > temp)
+                {
+                    arrToSort[priorIndex+1] = arrToSort[priorIndex];
+                    priorIndex--;
+                }
+
+                arrToSort[priorIndex+1] = temp;
+            }
         }
     }
-    }
+}
 
