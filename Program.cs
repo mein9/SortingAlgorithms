@@ -11,11 +11,18 @@ namespace SortingAlgorithms
             int[] arr2 = { 90, 3, 2, 56, 32, 34, 65, 68, 76, 1, 0, 100, 8 };
             int[] arr3 = { 90, 3, 2, 56, 32, 34, 65, 68, 76, 1, 0, 100, 8 };
             int[] arr4 = { 90, 3, 2, 56, 32, 34, 65, 68, 76, 1, 0, 100, 8 };
+            int[] arr5 = { 90, 3, 2, 56, 32, 34, 65, 68, 76, 1, 0, 100, 8 };
 
-            MergeSort(arr4);
-            PrintArray(arr4);
+            Console.WriteLine("QuickSort");
+            PrintArray(arr5);
+            QuickSort(arr5, 0, arr5.Length - 1 );
+            PrintArray(arr5);
 
-            //Console.WriteLine("Bubblesort");
+            //Console.WriteLine("MergeSort");
+            //MergeSort(arr4);
+            //PrintArray(arr4);
+
+            ////Console.WriteLine("Bubblesort");
             //PrintArray(arr1);
             //Stopwatch stopwatch = new Stopwatch();
             //stopwatch.Start();
@@ -79,6 +86,49 @@ namespace SortingAlgorithms
             }
 
         }
+        /// <summary>
+        /// Utilizes a quick sort algorithm to sort the passed in array
+        /// </summary>
+        /// <param name="arrToSort">the array that is sorted </param>
+        /// <param name="low">the smaller index of the subarray </param>
+        /// <param name="high">the larger index of the subarray </param>
+        public static void QuickSort(int[] arrToSort, int low, int high)
+        {
+            if (low < high)
+            {
+                // Partition return pivot location
+                int pivotIndex = Partition(arrToSort, low, high);
+
+                // call QuickSort again on the new subarrays passed on pivots position
+                QuickSort(arrToSort, low, pivotIndex - 1);
+                QuickSort(arrToSort, pivotIndex + 1, high);
+            }
+        }
+        public static int Partition(int[] arr, int low, int high)
+        {
+            int pivot = arr[high]; // setting pivot to be the last value in array
+            int i = low - 1;
+
+
+            for(int j = low; j < high; j++)
+            {
+                if (arr[j] < pivot)
+                {
+                    i++;
+                    // swaps i and j in array
+                    Swap(arr, i, j);
+                }
+            }
+            Swap(arr,++i, high);
+            return i;
+        }
+        public static void Swap(int[] arr, int i, int j)
+        {
+            int temp = arr[j];
+            arr[j] = arr[i];
+            arr[i] = temp;
+        }
+
         public static void PrintArray(Student[] arr)
         {
             foreach (var item in arr)
@@ -219,8 +269,38 @@ namespace SortingAlgorithms
 
             MergeSort(leftSubArray);
             MergeSort(rightSubArray);
+            Merge(arrToSort, leftSubArray, rightSubArray);
 
+        }
+        public static void Merge(int[] arr, int[] leftArr, int[] rightArr)
+        {
+            int arrIndex = 0, leftIndex =  0, rightIndex = 0;
 
+            // while the leftArr has vaules and the right array has vaulues
+            // evaluates which value is less - and make assignments
+            while (leftIndex < leftArr.Length && rightIndex < rightArr.Length)
+            {
+                if(leftArr[leftIndex] <= rightArr[rightIndex])
+                {
+                    arr[arrIndex++] = leftArr[leftIndex++];
+
+                }
+                else
+                {
+                    arr[arrIndex++] = rightArr[rightIndex++];
+                }
+            }
+            // copy remaining elements from left array, if any
+            while(leftIndex < leftArr.Length)
+            {
+                arr[arrIndex++] = leftArr[leftIndex++];
+            }
+
+             // copy remaining elements from left array, if any
+            while (rightIndex < rightArr.Length)
+            {
+                arr[arrIndex++] = rightArr[rightIndex++];
+            }
         }
     }
 }
